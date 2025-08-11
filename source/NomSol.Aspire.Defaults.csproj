@@ -4,8 +4,15 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	<Authors>Nominal Solutions LLC</Authors>
+	<Copyright>2025 Nominal Solutions LLC</Copyright>
+	<PackageProjectUrl></PackageProjectUrl>
+	<Version>1.0.0</Version>
+	<Description>This project extracts the service default project from .NET Aspire Orchestration into a nuget package.</Description>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 	<ItemGroup>
+		<None Include="..\README.md" Pack="true" PackagePath="\"/>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 		<PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.7.0" />
 		<PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="9.4.0" />
