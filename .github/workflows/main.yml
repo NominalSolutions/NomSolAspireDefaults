@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         project:
-          - nomsol.aspire.defaults
+          - NomSol.Aspire.Defaults
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
 
       - name: Update version in .csproj
         run: |
-          CSPROJ_PATH="./${{ matrix.project }}/${{ matrix.project }}.csproj"
+          CSPROJ_PATH="./${{ matrix.project }}.csproj"
           if [ -f "$CSPROJ_PATH" ]; then
             sed -i "s|<Version>.*</Version>|<Version>${{ steps.set_version.outputs.new_version }}</Version>|" "$CSPROJ_PATH"
             echo "Updated version in $CSPROJ_PATH to ${{ steps.set_version.outputs.new_version }}"
@@ -69,15 +69,15 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: Restore dependencies
-        run: dotnet restore ./${{ matrix.project }}/${{ matrix.project }}.csproj
+        run: dotnet restore ./${{ matrix.project }}.csproj
 
       - name: Build the project
-        run: dotnet build ./${{ matrix.project }}/${{ matrix.project }}.csproj --configuration Release --no-restore
+        run: dotnet build ./${{ matrix.project }}.csproj --configuration Release --no-restore
 
       - name: Pack NuGet package
         run: |
           mkdir -p ./nupkgs/${{ matrix.project }}
-          dotnet pack ./${{ matrix.project }}/${{ matrix.project }}.csproj --configuration Release --no-build --output ./nupkgs/${{ matrix.project }}
+          dotnet pack ./${{ matrix.project }}.csproj --configuration Release --no-build --output ./nupkgs/${{ matrix.project }}
 
       - name: Publish to NuGet
         env:
