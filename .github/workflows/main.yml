@@ -45,7 +45,7 @@ jobs:
           PATCH=$((PATCH + 1))
           
           # Construct new version with pre-release label
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH-alpha.${{ github.run_number }}"
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           echo "New version: $NEW_VERSION"
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
