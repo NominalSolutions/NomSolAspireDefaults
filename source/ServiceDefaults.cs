@@ -15,7 +15,7 @@ namespace NomSol.Aspire.Defaults
         private const string HealthEndpointPath = "/health";
         private const string AlivenessEndpointPath = "/alive";
 
-        public static TBuilder AddServiceDefaults<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
+        public static TBuilder AddServiceDefaults<TBuilder>(this TBuilder builder, bool enableHttpClientResilience = false) where TBuilder : IHostApplicationBuilder
         {
             builder.ConfigureOpenTelemetry();
 
@@ -25,9 +25,10 @@ namespace NomSol.Aspire.Defaults
 
             builder.Services.ConfigureHttpClientDefaults(http =>
             {
-                // Turn on resilience by default
-                http.AddStandardResilienceHandler();
-
+                if(enableHttpClientResilience)
+                {
+                    http.AddStandardResilienceHandler();
+                }
                 // Turn on service discovery by default
                 http.AddServiceDiscovery();
             });
